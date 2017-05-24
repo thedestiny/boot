@@ -4,10 +4,4 @@
 /boot.iml
 /src/main/resources/static/
 /.git
-src/main/java/com/acedata/boot/dao/
-src/main/java/com/acedata/boot/entity/
-src/main/java/com/acedata/boot/util/http/
-src/main/java/com/acedata/boot/util/java8/
-src/main/java/com/acedata/boot/util/string/
-src/main/resources/templates/
 target/
