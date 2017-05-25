@@ -1,23 +1,28 @@
 package com.acedata.boot.domain;
 
+import javax.persistence.*;
 import java.util.Date;
 
+
+@Entity
+@Table(name = "user")
 public class User {
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private Long id;
+    private String userName;
+    private Integer age;
+    private String mail;
+    private String address;
+    private Date createTime;
 
-    Integer id;
-    String userName;
-    Integer age;
-    String mail;
-    String address;
-    Date createTime;
 
-
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
