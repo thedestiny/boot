@@ -6,12 +6,12 @@ import com.acedata.boot.domain.Task;
 import com.acedata.boot.domain.User;
 import com.acedata.boot.service.inter.IndexService;
 import com.google.common.collect.Lists;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 
 @Service
@@ -24,6 +24,8 @@ public class IndexServiceImpl implements IndexService {
     @Autowired
     private UserDao userDao;
 
+    private Logger logger = LoggerFactory.getLogger(IndexServiceImpl.class);
+
 
     @Override
     public List<String> queryList() {
@@ -32,7 +34,7 @@ public class IndexServiceImpl implements IndexService {
         Collections.sort(list);
 
         for (String str : list) {
-            System.out.println("str is : " + str);
+            logger.debug("str is {}", str);
         }
 
         return list;
@@ -57,11 +59,11 @@ public class IndexServiceImpl implements IndexService {
             return (List<Task>) taskIterable;
         }
 
-        return null;
+        return Lists.newArrayList();
 
     }
 
-
+    @Autowired
     public Integer saveTask(Task task) {
 
         return 1;

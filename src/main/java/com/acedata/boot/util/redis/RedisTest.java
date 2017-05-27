@@ -8,6 +8,7 @@ import redis.clients.jedis.Transaction;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 
 public class RedisTest {
@@ -105,10 +106,6 @@ public class RedisTest {
         /* 查看长度 */
         jedis.llen("list-test");
 
-
-
-
-
     }
 
     @Test
@@ -128,14 +125,34 @@ public class RedisTest {
     @Test
     public void testHash(){
 
-        jedis.hset("hash-test","test","value0");
-        System.out.println(jedis.hget("hash-test","test"));
         Map<String,String> map = Maps.newHashMap();
         map.put("name","张三");
         map.put("age","19");
         map.put("address","UK");
         map.put("phone","15637432654");
+
+        /* 批量导入 key-> value*/
         jedis.hmset("hash-object",map);
+        /* 获取key  hkeys*/
+        Set<String> stringSet = jedis.hkeys("hash-object");
+        /* 获取value */
+        List<String> list = jedis.hvals("hash-object");
+        /* 获取属性值 */
+        String phone = jedis.hget("hash-object","phone");
+        /* 删除属性 */
+        Long result = jedis.hdel("hash-object","phone","age");
+        /* 查看长度 */
+        Long length = jedis.hlen("hash-object");
+        /* 是否存在 */
+        Boolean exists = jedis.hexists("hash-object","phone");
+        /* 添加属性以及值*/
+        jedis.hset("hash-object","phone","13233333333");
+        jedis.hset("hash-object","age","50");
+        jedis.hset("hash-object","age","25");
+        List<String> mgetValue = jedis.hmget("hash-object","name","phone");
+        /* 获取对象 */
+        Map<String,String> allKeyAndValue = jedis.hgetAll("hash-object");
+
 
 
     }
